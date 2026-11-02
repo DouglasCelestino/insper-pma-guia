@@ -70,7 +70,8 @@ Repo do grupo: https://github.com/insper-plat-projeto/pma (privado)
 
 Verificado em 2026-11-02:
 - Submódulos existentes: `api/account` (`pma-account`) e `api/account-service` (`pma-account-service`).
-- Gateway e Auth ainda não existem como submódulos. Pelo padrão do grupo, os repos seriam `pma-auth`, `pma-auth-service` e `pma-gateway-service`. Falta confirmar se a conta do aluno pode criar repos na organização.
+- Gateway: repo `pma-gateway-service` criado, com WebFlux, teste passando e commit `85904dd` no GitHub. Submódulo em `api/gateway-service`, no `pma` (`9470404`, já no GitHub). Próximo código: `application.yaml` e `GatewayResource`, feitos pelo aluno.
+- Auth ainda não existe como submódulo. Pelo padrão do grupo, os repos seriam `pma-auth` e `pma-auth-service`.
 
 ### Bloqueio aberto: clone do `pma` quebra
 
@@ -86,6 +87,7 @@ Verificado em 2026-11-02:
 - O Auth depende do Account, inclusive de `POST /accounts/login`. Combinar com quem cuida dele.
 - O enunciado do load test cita `/info`, mas o Gateway dos hands-on só tem `/health-check`.
 - O cookie do JWT usa `Secure=true` e `SameSite=None`, e o navegador só o envia por HTTPS. Pode causar 401 em load balancer só com HTTP (dedução, ainda não testada).
+- O projeto usa Java 25. Em máquinas com Scoop, alternar o JDK padrão com `scoop reset temurin25-jdk` e `scoop reset temurin21-jdk`, e abrir um terminal novo depois.
 - `JWT_SECRET_KEY` real nunca vai para o repo.
 - No CI, `actions/checkout` precisa de `submodules: true` e, para repos privados, de um token com acesso.
 - O EKS cobra por hora desde a criação do cluster. Deixar para depois de tudo rodar localmente e configurar um AWS Budget antes.
