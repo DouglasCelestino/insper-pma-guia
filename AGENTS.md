@@ -34,7 +34,7 @@ Comece com `git pull` e, antes de trocar de máquina, lembre o aluno de fazer co
 - Enunciado: https://insper.github.io/platform/2026.2/exercises/project/
 - Aplicação de compra e venda em microsserviços, em grupo de 2 a 3 pessoas, com tudo integrado e no ar.
 - Cada aluno entrega um repo MkDocs próprio e um vídeo de 1 a 2 minutos.
-- Prazo de entrega: **não encontrado nas páginas. Confirmar com o aluno.**
+- Prazo de entrega: **5 de dezembro de 2026**, informado pelo aluno em 2026-11-02.
 
 | Item | Peso |
 |---|---|
@@ -65,6 +65,15 @@ Ordem planejada:
 4. `RouterValidator` e `AuthorizationFilter` no Gateway. Dependem de `/auth/solve`.
 
 Ordem do `mvn clean install`: `account`, `auth`, `auth-service`.
+
+Decisão para o Auth: começar por `auth`, sem a dependência de `account` e sem `GET /auth/me`, enquanto o Account não existir. O `pma-account` (`f348443`) está em `0.0.1-SNAPSHOT`, ainda tem classe principal e não tem `AccountOut`; o curso espera `1.0.0`, sem classe principal. Quando o Account estiver pronto, adicionar a dependência e o `me` (uso de `AccountOut` em `me` é dedução, conferir no hands-on).
+
+Plano proposto até a entrega (metas de início de semana, ajustar com o grupo):
+- 2/11: `auth` e `JwtService`
+- 9/11: Account pronto, login e registro, filtro do Gateway, Compose completo
+- 16/11: bottlenecks e CI/CD
+- 23/11: EKS, deploy e load test
+- 30/11: custos, MkDocs e vídeo, com folga para a entrega
 
 ## Estado atual
 
