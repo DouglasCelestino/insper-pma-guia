@@ -26,6 +26,8 @@ Comece com `git pull` e, antes de trocar de máquina, lembre o aluno de fazer co
 5. Diferencie o que foi verificado do que é dedução.
 6. Antes de alterar o que é compartilhado com o grupo, confirme com o aluno.
 7. Registre aqui decisões, estado atual e uso de IA.
+8. A IA faz commit e push **apenas** neste repo do guia (`insper-pma-guia`), sempre que atualizar a documentação. Nos repos do projeto (`pma` e submódulos), quem faz commit e push é o aluno.
+9. Ao mostrar uma versão diferente da do material do curso, explique o que mudou e por quê.
 
 ## O projeto
 
@@ -71,6 +73,8 @@ Repo do grupo: https://github.com/insper-plat-projeto/pma (privado)
 Verificado em 2026-11-02:
 - Submódulos existentes: `api/account` (`pma-account`) e `api/account-service` (`pma-account-service`).
 - Gateway: repo `pma-gateway-service` criado, com WebFlux, teste passando e commit `85904dd` no GitHub. Submódulo em `api/gateway-service`, no `pma` (`9470404`, já no GitHub). Próximo código: `application.yaml` e `GatewayResource`, feitos pelo aluno.
+- Account: `pma-account` e `pma-account-service` só têm o esqueleto gerado, sem endpoints nem Dockerfile. Até isso mudar, o `compose.yaml` só sobe o Gateway.
+- Gateway testado no Docker em 2026-11-02: `/health-check` 200, `/insper` chega ao site (403 da Akamai) e `/accounts` dá 500 porque o Account não existe, como esperado. A rota `/insper` foi mantida para estudo e deve sair antes do deploy. Conferir se esse trabalho já foi commitado. Próximo: Auth, a partir de `JwtService`.
 - Auth ainda não existe como submódulo. Pelo padrão do grupo, os repos seriam `pma-auth` e `pma-auth-service`.
 
 ### Bloqueio aberto: clone do `pma` quebra
