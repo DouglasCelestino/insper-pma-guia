@@ -28,6 +28,7 @@ Comece com `git pull` e, antes de trocar de máquina, lembre o aluno de fazer co
 7. Registre aqui decisões, estado atual e uso de IA.
 8. A IA faz commit e push **apenas** neste repo do guia (`insper-pma-guia`), sempre que atualizar a documentação. Nos repos do projeto (`pma` e submódulos), quem faz commit e push é o aluno.
 9. Ao mostrar uma versão diferente da do material do curso, explique o que mudou e por quê.
+10. Método de estudo recomendado para código pronto do curso: ler e prever o que faz, escrever de memória, comparar com o original e explicar sem consultar. Código repetitivo (imports, `pom.xml`, DTOs simples) pode ser copiado. Partes centrais (`JwtService`, `AuthService`, `RouterValidator`, `AuthorizationFilter`) devem ser escritas assim.
 
 ## O projeto
 
@@ -66,7 +67,7 @@ Ordem planejada:
 
 Ordem do `mvn clean install`: `account`, `auth`, `auth-service`.
 
-Decisão para o Auth: começar por `auth`, sem a dependência de `account` e sem `GET /auth/me`, enquanto o Account não existir. O `pma-account` (`f348443`) está em `0.0.1-SNAPSHOT`, ainda tem classe principal e não tem `AccountOut`; o curso espera `1.0.0`, sem classe principal. Quando o Account estiver pronto, adicionar a dependência e o `me` (uso de `AccountOut` em `me` é dedução, conferir no hands-on).
+Decisão para o Auth: começar por `auth`, sem a dependência de `account` e sem `GET /auth/me`, enquanto o Account não existir. O `pma-account` (`f348443`) está em `0.0.1-SNAPSHOT`, ainda tem classe principal e não tem `AccountOut`; o curso espera `1.0.0`, sem classe principal. Quando o Account estiver pronto, adicionar a dependência e o `me`. O `AuthController` do hands-on confirma que `me` retorna `AccountOut`, de `store.account`.
 
 Plano proposto até a entrega (metas de início de semana, ajustar com o grupo):
 - 2/11: `auth` e `JwtService`
