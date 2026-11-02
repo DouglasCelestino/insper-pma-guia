@@ -74,7 +74,7 @@ Verificado em 2026-11-02:
 - Submódulos existentes: `api/account` (`pma-account`) e `api/account-service` (`pma-account-service`).
 - Gateway: repo `pma-gateway-service` criado, com WebFlux, teste passando e commit `85904dd` no GitHub. Submódulo em `api/gateway-service`, no `pma` (`9470404`, já no GitHub). Próximo código: `application.yaml` e `GatewayResource`, feitos pelo aluno.
 - Account: `pma-account` e `pma-account-service` só têm o esqueleto gerado, sem endpoints nem Dockerfile. Até isso mudar, o `compose.yaml` só sobe o Gateway.
-- Gateway testado no Docker em 2026-11-02: `/health-check` 200, `/insper` chega ao site (403 da Akamai) e `/accounts` dá 500 porque o Account não existe, como esperado. A rota `/insper` foi mantida para estudo e deve sair antes do deploy. Conferir se esse trabalho já foi commitado. Próximo: Auth, a partir de `JwtService`.
+- Gateway testado no Docker em 2026-11-02: `/health-check` 200, `/insper` chega ao site (403 da Akamai) e `/accounts` dá 500 porque o Account não existe, como esperado. A rota `/insper` foi mantida para estudo e deve sair antes do deploy. Enviado ao GitHub: gateway em `cfc3c06`, `pma` em `7f3b00b`. Fase 1 do Gateway (rotas e `/health-check`) concluída. Pendências do Gateway: `RouterValidator` e `AuthorizationFilter` (dependem de `/auth/solve`), rota `/auth/**`, retirada de `/insper` e endpoint do load test. Próximo: Auth, a partir de `JwtService`.
 - Auth ainda não existe como submódulo. Pelo padrão do grupo, os repos seriam `pma-auth` e `pma-auth-service`.
 
 ### Bloqueio aberto: clone do `pma` quebra
