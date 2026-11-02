@@ -1,5 +1,8 @@
 # Repo do grupo, com histórico próprio
 pma/
 
+# Pastas temporárias usadas para criar o primeiro commit de cada serviço
+*-temp/
+
 # Logs locais do navegador usado pela IA
 .gstack/

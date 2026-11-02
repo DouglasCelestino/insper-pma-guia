@@ -13,6 +13,9 @@ São dois problemas separados:
 [user]
     useConfigOnly = true
 
+[init]
+    defaultBranch = main
+
 [includeIf "gitdir/i:~/Documents/Insper/"]
     path = ~/.gitconfig-pessoal
 
