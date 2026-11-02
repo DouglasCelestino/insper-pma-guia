@@ -1,2 +1,5 @@
 # Repo do grupo, com histórico próprio
 pma/
+
+# Logs locais do navegador usado pela IA
+.gstack/

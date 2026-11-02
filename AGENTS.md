@@ -3,6 +3,10 @@
 Este arquivo é a fonte de verdade para qualquer IA que continue este guia, em qualquer máquina.
 Leia tudo antes de responder. Mantenha-o atualizado ao fim de cada avanço ou decisão.
 
+Este guia fica no repo privado https://github.com/DouglasCelestino/insper-pma-guia.
+O repo do grupo (`pma/`) é clonado dentro desta pasta e ignorado pelo guia.
+Comece com `git pull` e, antes de trocar de máquina, lembre o aluno de fazer commit e push.
+
 Última atualização: 2026-11-02
 
 ## Quem é o aluno
