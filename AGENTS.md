@@ -86,7 +86,11 @@ O aluno parou por cansaço e disse que **não vai implementar o Account**, que �
 4. Depois de compilar: o aluno explica `generate` e `getId` do `JwtService` de memória e escreve o fluxo do login até `id-account`, que continua pendente.
 5. Fazer commit no `pma-auth-service` e só então no `pma`, adicionando apenas os itens do Auth.
 
-Commits locais feitos pela IA a pedido do aluno, sem coautoria e **sem push** (exceção pontual à regra 8): `auth-service` `694fc3a` e `gateway-service` `ecf7325`, ambos na `main`. O `auth-service` ainda não compila; decidir antes do push se vai para a `main`. O `pom.xml` do Gateway perdeu as dependências de teste, mas `GatewayServiceApplicationTests.java` continua lá, o que deve quebrar o build (dedução, não testado). Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas. Enquanto não houver push, esse trabalho só existe nesta máquina.
+Commits locais feitos pela IA a pedido do aluno, sem coautoria e **sem push** (exceção pontual à regra 8): `auth-service` `694fc3a` e `gateway-service` `ecf7325`, ambos na `main`.
+
+Correções aplicadas pela IA a pedido do aluno, ainda sem commit: Gateway com Boot `4.1.2`, Cloud `2025.1.4` e dependências de teste de volta (`clean package` passou com Java 25, sem teste no Docker); `auth-service` em `store.auth`, sem `AuthServiceApplication` e com as mesmas versões. Os passos 3 do item acima já estão feitos, exceto o build real. O `auth-service` só compilou em uma cópia temporária, com o contrato do curso e o `me` reativado; no repo real ele falha por falta de `store:account:1.0.0`. O `me` não foi reativado no `auth`, para não quebrar essa biblioteca enquanto o Account não existe. Plano: Gateway na `main`; `auth-service` em branch até o Account ser publicado.
+
+Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas. Enquanto não houver push, esse trabalho só existe nesta máquina.
 
 ## Estado atual
 
