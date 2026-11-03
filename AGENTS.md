@@ -76,6 +76,18 @@ Plano proposto até a entrega (metas de início de semana, ajustar com o grupo):
 - 23/11: EKS, deploy e load test
 - 30/11: custos, MkDocs e vídeo, com folga para a entrega
 
+## Onde paramos (2026-11-02, fim da sessão)
+
+O aluno parou por cansaço e disse que **não vai implementar o Account**, que é do colega. Comece a próxima sessão por aqui:
+
+1. Confirmar como destravar o build: esperar o colega publicar `store:account:1.0.0` (a biblioteca é quase toda copiada do curso) ou criar só o contrato no stub local. Sem esse jar no `~/.m2`, o `auth-service` não compila. Não criar nada do Account sem ele decidir.
+2. Com o jar disponível: no `auth`, reativar a dependência e o `me` e reinstalar.
+3. No `auth-service`: mover os arquivos para `store.auth`, apagar `AuthServiceApplication.java`, alinhar as versões com o `auth` (Boot `4.1.2`, Cloud `2025.1.4`) e rodar `.\mvnw.cmd clean package` com Java 25.
+4. Depois de compilar: o aluno explica `generate` e `getId` do `JwtService` de memória e escreve o fluxo do login até `id-account`, que continua pendente.
+5. Fazer commit no `pma-auth-service` e só então no `pma`, adicionando apenas os itens do Auth.
+
+Só nesta máquina, sem commit: código do `auth-service` e, no `pma`, o submódulo `api/auth-service` e `.gitmodules` em stage, além de `api/compose.yaml` modificado. Sem esse commit, outra máquina não terá esse trabalho.
+
 ## Estado atual
 
 Repo do grupo: https://github.com/insper-plat-projeto/pma (privado)
