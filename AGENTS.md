@@ -86,7 +86,7 @@ O aluno parou por cansaço e disse que **não vai implementar o Account**, que �
 4. Depois de compilar: o aluno explica `generate` e `getId` do `JwtService` de memória e escreve o fluxo do login até `id-account`, que continua pendente.
 5. Fazer commit no `pma-auth-service` e só então no `pma`, adicionando apenas os itens do Auth.
 
-Só nesta máquina, sem commit: código do `auth-service` e, no `pma`, o submódulo `api/auth-service` e `.gitmodules` em stage, além de `api/compose.yaml` modificado. Sem esse commit, outra máquina não terá esse trabalho.
+Commits locais feitos pela IA a pedido do aluno, sem coautoria e **sem push** (exceção pontual à regra 8): `auth-service` `694fc3a` e `gateway-service` `ecf7325`, ambos na `main`. O `auth-service` ainda não compila; decidir antes do push se vai para a `main`. O `pom.xml` do Gateway perdeu as dependências de teste, mas `GatewayServiceApplicationTests.java` continua lá, o que deve quebrar o build (dedução, não testado). Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas. Enquanto não houver push, esse trabalho só existe nesta máquina.
 
 ## Estado atual
 
