@@ -86,11 +86,11 @@ O aluno parou por cansaço e disse que **não vai implementar o Account**, que �
 4. Depois de compilar: o aluno explica `generate` e `getId` do `JwtService` de memória e escreve o fluxo do login até `id-account`, que continua pendente.
 5. Fazer commit no `pma-auth-service` e só então no `pma`, adicionando apenas os itens do Auth.
 
-Commits locais feitos pela IA a pedido do aluno, sem coautoria e **sem push** (exceção pontual à regra 8): `auth-service` `694fc3a` e `gateway-service` `ecf7325`, ambos na `main`.
+Commits, correções e push feitos pela IA a pedido explícito do aluno nesta sessão (exceção pontual à regra 8, que continua valendo). Correções: Gateway com Boot `4.1.2`, Cloud `2025.1.4` e dependências de teste de volta (`clean package` passou com Java 25, sem teste no Docker); `auth-service` em `store.auth`, sem `AuthServiceApplication` e com as mesmas versões. Os passos 3 do item acima já estão feitos, exceto o build real. O `auth-service` só compilou em uma cópia temporária, com o contrato do curso e o `me` reativado; no repo real ele falha por falta de `store:account:1.0.0`. O `me` não foi reativado no `auth`, para não quebrar essa biblioteca enquanto o Account não existe. 
 
-Correções aplicadas pela IA a pedido do aluno, ainda sem commit: Gateway com Boot `4.1.2`, Cloud `2025.1.4` e dependências de teste de volta (`clean package` passou com Java 25, sem teste no Docker); `auth-service` em `store.auth`, sem `AuthServiceApplication` e com as mesmas versões. Os passos 3 do item acima já estão feitos, exceto o build real. O `auth-service` só compilou em uma cópia temporária, com o contrato do curso e o `me` reativado; no repo real ele falha por falta de `store:account:1.0.0`. O `me` não foi reativado no `auth`, para não quebrar essa biblioteca enquanto o Account não existe. Plano: Gateway na `main`; `auth-service` em branch até o Account ser publicado.
+Push feito pela IA a pedido do aluno, sem coautoria (2026-11-02): `gateway-service` `main` em `52bdb46`; `auth-service` na branch `feat/auth-service` em `1dd9210` (a `main` continua em `ddcc2ec`, só com o esqueleto; fazer o merge quando o Account for publicado); `pma` em `927bf34`, que só atualiza o Gateway. Em outra máquina, para continuar o Auth: `git switch feat/auth-service` em `api/auth-service`.
 
-Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas. Enquanto não houver push, esse trabalho só existe nesta máquina.
+Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. Eles ficam de fora até o `auth-service` chegar à `main`, para não quebrar o Compose do grupo; essas alterações do `pma` só existem nesta máquina. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas.
 
 ## Estado atual
 
