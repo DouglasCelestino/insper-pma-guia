@@ -89,10 +89,9 @@ Verificado no GitHub em 2026-11-20:
 
 Credenciais nesta máquina: o `gh` passou a ser o helper do `github.com` e só entrega o token da conta ativa (`DouglasPixcards`). Resolvido com `credential.https://DouglasCelestino@github.com.helper = manager` (ver `docs/git-multiplas-contas.md`).
 
+Feito em 2026-11-20 pelo aluno: `pma` atualizado; `account` instalado com o wrapper do `auth` (o repo do Account não tem `mvnw`; avisar o colega); `me` reativado no `auth` (`e94c212`); `auth-service` compilou no repo real e foi para a `main` (`1dd9210`); `pma` em `18bf0ea`, com o submódulo `api/auth-service` e o ponteiro do `auth`. Erro repetido: `submodule add` rodado de dentro de `api/` criou `api/api/auth-service`; foi desfeito antes do push.
+
 Próximos passos (comandos no `pma` são do aluno):
-1. Atualizar o `pma` local, que está em `927bf34`. Antes do pull: desfazer o stage de `.gitmodules`, `api/auth-service` e `api/compose.yaml` e restaurar os dois arquivos. A pasta `api/auth-service` continua no disco. Desfazer as exclusões locais em `api/account` e `api/account-service`, que não têm trabalho dele. Depois: `git pull` e `git submodule update --init`.
-2. Instalar `api/account` (`clean install`). No `auth`, reativar a dependência e o `me`, reinstalar e publicar.
-3. No `auth-service` (`feat/auth-service`), rodar `clean package`, fazer merge na `main` e publicar.
 4. No `pma`: adicionar o submódulo `api/auth-service`, `gateway` e `auth` no Compose, rota do Exchange no Gateway e jobs do Prometheus. Discutir com o grupo a porta do `account`.
 5. Pendências de estudo: explicar `generate` e `getId` do `JwtService` e o fluxo do login até `id-account`.
 
