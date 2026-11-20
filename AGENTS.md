@@ -92,8 +92,8 @@ Credenciais nesta máquina: o `gh` passou a ser o helper do `github.com` e só e
 Feito em 2026-11-20 pelo aluno: `pma` atualizado; `account` instalado com o wrapper do `auth` (o repo do Account não tem `mvnw`; avisar o colega); `me` reativado no `auth` (`e94c212`); `auth-service` compilou no repo real e foi para a `main` (`1dd9210`); `pma` em `18bf0ea`, com o submódulo `api/auth-service` e o ponteiro do `auth`. Erro repetido: `submodule add` rodado de dentro de `api/` criou `api/api/auth-service`; foi desfeito antes do push.
 
 Próximos passos (comandos no `pma` são do aluno):
-4. No `pma`: adicionar o submódulo `api/auth-service`, `gateway` e `auth` no Compose, rota do Exchange no Gateway e jobs do Prometheus. Discutir com o grupo a porta do `account`.
-5. Pendências de estudo: explicar `generate` e `getId` do `JwtService` e o fluxo do login até `id-account`.
+1. No `pma`: `gateway` e `auth` no Compose, rota do Exchange no Gateway e jobs do Prometheus. Discutir com o grupo a porta do `account`.
+2. Pendências de estudo: explicar `generate` e `getId` do `JwtService` e o fluxo do login até `id-account`.
 
 ## Estado atual
 
