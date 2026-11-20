@@ -91,6 +91,16 @@ Credenciais nesta máquina: o `gh` passou a ser o helper do `github.com` e só e
 
 Feito em 2026-11-20 pelo aluno: `pma` atualizado; `account` instalado com o wrapper do `auth` (o repo do Account não tem `mvnw`; avisar o colega); `me` reativado no `auth` (`e94c212`); `auth-service` compilou no repo real e foi para a `main` (`1dd9210`); `pma` em `18bf0ea`, com o submódulo `api/auth-service` e o ponteiro do `auth`. Erro repetido: `submodule add` rodado de dentro de `api/` criou `api/api/auth-service`; foi desfeito antes do push.
 
+## Reta final (2026-11-20)
+
+O aluno informou às 11h42 que a entrega é **hoje, 2026-11-20, às 23h59** (antes registrado como 5/12) e pediu que a IA passe a escrever o código para acelerar. A regra 1 fica suspensa até a entrega: a IA escreve, o aluno roda, revisa, faz commit e push, e precisa saber explicar cada parte. Todo código desta fase deve constar no registro de uso de IA.
+
+Decisões: ninguém do grupo fez AWS, EKS, CI/CD nem load test. Bottlenecks do Douglas: load balancing (nginx na frente de réplicas do Gateway, padrão do hands-on 7) e vulnerability scanning (Trivy).
+
+Plano: 1) integração no Compose e login pelo site; 2) bottlenecks; 3) CI/CD com GitHub Actions; 4) EKS, HPA e load test, se der tempo; 5) MkDocs individual, uso de IA e vídeo.
+
+Bloco 1 e LB, escritos pela IA e sem commit: rota `/exchanges/**` e log `store` em `info` no Gateway; no Compose, `auth`, `gateway` com 2 réplicas sem porta, `lb` (nginx) em `8080:80` e `account` sem porta; `setup/nginx/nginx.conf`; `api/.env` local com `VOLUME_DB=./postgres-data`.
+
 Próximos passos (comandos no `pma` são do aluno):
 1. No `pma`: `gateway` e `auth` no Compose, rota do Exchange no Gateway e jobs do Prometheus. Discutir com o grupo a porta do `account`.
 2. Pendências de estudo: explicar `generate` e `getId` do `JwtService` e o fluxo do login até `id-account`.
