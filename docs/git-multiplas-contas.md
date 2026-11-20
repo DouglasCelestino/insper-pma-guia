@@ -48,6 +48,30 @@ git remote get-url origin
 
 O primeiro mostra o e-mail e o arquivo de onde ele veio. O segundo deve mostrar `SEU_USUARIO@` na URL.
 
+## Problema conhecido: `gh auth setup-git`
+
+O GitHub CLI pode registrar `gh auth git-credential` como helper de `https://github.com` no `~/.gitconfig`. Ele só entrega o token da conta **ativa** no `gh`. Com outra conta ativa, o Git falha assim:
+
+```
+fatal: could not read Password for 'https://SEU_USUARIO@github.com': No such file or directory
+```
+
+Diagnóstico:
+
+```
+gh auth status
+git config --show-origin --get-all credential.https://github.com.helper
+```
+
+Soluções:
+- Rápida, a cada troca: `gh auth switch -u SEU_USUARIO`.
+- Permanente: mandar só a conta pessoal para o Git Credential Manager. A regra com usuário na URL é mais específica e vence a do `gh`:
+  ```
+  git config --global --add "credential.https://SEU_USUARIO@github.com.helper" ""
+  git config --global --add "credential.https://SEU_USUARIO@github.com.helper" manager
+  ```
+  O valor vazio limpa os helpers herdados antes de definir o `manager`.
+
 ## Exceções
 
 - Repos pessoais fora da organização: clone com `https://SEU_USUARIO@github.com/SEU_USUARIO/repo.git`.
