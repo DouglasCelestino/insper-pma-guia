@@ -7,7 +7,7 @@ Este guia fica no repo privado https://github.com/DouglasCelestino/insper-pma-gu
 O repo do grupo (`pma/`) é clonado dentro desta pasta e ignorado pelo guia.
 Comece com `git pull` e, antes de trocar de máquina, lembre o aluno de fazer commit e push.
 
-Última atualização: 2026-11-02
+Última atualização: 2026-11-20
 
 ## Quem é o aluno
 
@@ -76,21 +76,25 @@ Plano proposto até a entrega (metas de início de semana, ajustar com o grupo):
 - 23/11: EKS, deploy e load test
 - 30/11: custos, MkDocs e vídeo, com folga para a entrega
 
-## Onde paramos (2026-11-02, fim da sessão)
+## Onde paramos (atualizado em 2026-11-20)
 
-O aluno parou por cansaço e disse que **não vai implementar o Account**, que é do colega. Comece a próxima sessão por aqui:
+O aluno ficou de 2/11 a 20/11 sem avançar, e o projeto está atrasado em relação ao plano acima. Enquanto isso, `matheuslv` integrou ao `pma` (`7c4bff3`): Account com login e PostgreSQL, Exchange (Python), Redis como cache do Account, front-end web com nginx, Prometheus e Grafana.
 
-1. Confirmar como destravar o build: esperar o colega publicar `store:account:1.0.0` (a biblioteca é quase toda copiada do curso) ou criar só o contrato no stub local. Sem esse jar no `~/.m2`, o `auth-service` não compila. Não criar nada do Account sem ele decidir.
-2. Com o jar disponível: no `auth`, reativar a dependência e o `me` e reinstalar.
-3. No `auth-service`: mover os arquivos para `store.auth`, apagar `AuthServiceApplication.java`, alinhar as versões com o `auth` (Boot `4.1.2`, Cloud `2025.1.4`) e rodar `.\mvnw.cmd clean package` com Java 25.
-4. Depois de compilar: o aluno explica `generate` e `getId` do `JwtService` de memória e escreve o fluxo do login até `id-account`, que continua pendente.
-5. Fazer commit no `pma-auth-service` e só então no `pma`, adicionando apenas os itens do Auth.
+Verificado no GitHub em 2026-11-20:
+- `pma-account` `main` em `99f4457`: biblioteca `store:account:1.0.0`, igual ao contrato do curso, com `POST /accounts/login`. **O Auth está destravado** e não precisa mais de stub.
+- `pma-auth` em `5e20e15`, sem o `me`. `pma-auth-service`: `main` em `ddcc2ec` (esqueleto) e trabalho em `feat/auth-service` (`1dd9210`). `pma-gateway-service` em `52bdb46`.
+- O `compose.yaml` do grupo não tem `gateway` nem `auth`, e o `account` publica `8080:8080` direto. Isso passa por fora do Gateway (o `id-account` pode ser forjado) e conflita com a porta do Gateway. Combinar com o grupo antes de mudar.
+- O Gateway não tem rota para o Exchange. O Prometheus tem jobs comentados para Gateway e Auth.
+- Observabilidade e cache já foram feitos pelo colega. Os 2 bottlenecks do Douglas precisam ser outros, a combinar com o grupo.
 
-Commits, correções e push feitos pela IA a pedido explícito do aluno nesta sessão (exceção pontual à regra 8, que continua valendo). Correções: Gateway com Boot `4.1.2`, Cloud `2025.1.4` e dependências de teste de volta (`clean package` passou com Java 25, sem teste no Docker); `auth-service` em `store.auth`, sem `AuthServiceApplication` e com as mesmas versões. Os passos 3 do item acima já estão feitos, exceto o build real. O `auth-service` só compilou em uma cópia temporária, com o contrato do curso e o `me` reativado; no repo real ele falha por falta de `store:account:1.0.0`. O `me` não foi reativado no `auth`, para não quebrar essa biblioteca enquanto o Account não existe. 
+Credenciais nesta máquina: o `gh` passou a ser o helper do `github.com` e só entrega o token da conta ativa (`DouglasPixcards`). Resolvido com `credential.https://DouglasCelestino@github.com.helper = manager` (ver `docs/git-multiplas-contas.md`).
 
-Push feito pela IA a pedido do aluno, sem coautoria (2026-11-02): `gateway-service` `main` em `52bdb46`; `auth-service` na branch `feat/auth-service` em `1dd9210` (a `main` continua em `ddcc2ec`, só com o esqueleto; fazer o merge quando o Account for publicado); `pma` em `927bf34`, que só atualiza o Gateway. Em outra máquina, para continuar o Auth: `git switch feat/auth-service` em `api/auth-service`.
-
-Sem commit: no `pma`, `.gitmodules`, `api/auth-service` e `api/compose.yaml`. Eles ficam de fora até o `auth-service` chegar à `main`, para não quebrar o Compose do grupo; essas alterações do `pma` só existem nesta máquina. As exclusões em stage de `api/account` e `api/account-service` não foram tocadas.
+Próximos passos (comandos no `pma` são do aluno):
+1. Atualizar o `pma` local, que está em `927bf34`. Antes do pull: desfazer o stage de `.gitmodules`, `api/auth-service` e `api/compose.yaml` e restaurar os dois arquivos. A pasta `api/auth-service` continua no disco. Desfazer as exclusões locais em `api/account` e `api/account-service`, que não têm trabalho dele. Depois: `git pull` e `git submodule update --init`.
+2. Instalar `api/account` (`clean install`). No `auth`, reativar a dependência e o `me`, reinstalar e publicar.
+3. No `auth-service` (`feat/auth-service`), rodar `clean package`, fazer merge na `main` e publicar.
+4. No `pma`: adicionar o submódulo `api/auth-service`, `gateway` e `auth` no Compose, rota do Exchange no Gateway e jobs do Prometheus. Discutir com o grupo a porta do `account`.
+5. Pendências de estudo: explicar `generate` e `getId` do `JwtService` e o fluxo do login até `id-account`.
 
 ## Estado atual
 
@@ -107,14 +111,9 @@ Verificado em 2026-11-02:
 - Atenção no `pma`: `api/account` aparece modificado localmente (`f348443`, enquanto o `pma` aponta para `a2c3211`) e há alterações locais em `account-service` e `gateway-service`. Usar `git add api/auth`, nunca `git add .` nem `commit -a`, para não decidir o bloqueio do Account por acidente.
 - Lembrete de erro recorrente: usar `git submodule add <url> api/<nome>` e `git mv`, nunca `mv`, para mover submódulos.
 
-### Bloqueio aberto: clone do `pma` quebra
+### Bloqueio do clone: resolvido
 
-- O `pma` (commit `26fe6e0`) aponta `api/account` para `a2c3211`, que não existe no GitHub. O `main` de `pma-account` está em `f348443`.
-- Erro: `upload-pack: not our ref a2c3211...`
-- Causa exata desconhecida: commit nunca enviado, ou substituído por amend/force push.
-- Foi sugerido perguntar a `matheuslv`, autor do commit, se `a2c3211` tem trabalho que não está em `f348443`. **Resposta ainda não registrada.**
-- Se tiver: enviar o commit para `pma-account`. Se não: apontar o `pma` para `f348443` e fazer push.
-- Não corrigir sem essa resposta.
+O `pma` apontava `api/account` para `a2c3211`, que não existia no GitHub. Resolvido pelo grupo até 2026-11-20: o `main` aponta para `99f4457`, que existe.
 
 ## Pontos de atenção
 
