@@ -147,3 +147,11 @@ O `pma` apontava `api/account` para `a2c3211`, que não existia no GitHub. Resol
 | Data | O que a IA fez |
 |---|---|
 | 2026-11-02 | Resumiu o enunciado, explicou submódulos, orientou a configuração do Git e diagnosticou o erro de clone. Nenhum código do projeto foi escrito. |
+
+## Entrega (2026-11-20, 23h26)
+
+- Compose: gateway (2 réplicas) atrás do nginx `lb` em 8080, auth, healthcheck do Postgres. Testado de ponta a ponta.
+- Jenkins em `pma/jenkins` (localhost:9080), 4 jobs criados pela IA em disco, credenciais `dockerhub-credential` (`dody16`) e `github-credential` (token classic `repo`). Builds verdes: account #1, auth #1, auth-service #1, gateway-service #4. Trivy com cache em volume `trivy-cache` e `--timeout 15m`.
+- EKS `store` em us-east-1 na conta do grupo `992382635549` (perfil `pma`, SSO `d-9067fdf7f1`). Deploy com `pma/k8s/deploy.sh`; HPA testado (1 → 8 pods, CPU 391%/50%). Exchange dá 502 na AWS (API externa). **Cluster precisa ser apagado** se ainda existir.
+- Docs: `pma/docs` e site público https://douglascelestino.github.io/pma-docs/ (repo `DouglasCelestino/pma-docs`, publicado com `mkdocs gh-deploy`).
+- Sem vídeo do load test nem vídeo individual (decisão do aluno).
