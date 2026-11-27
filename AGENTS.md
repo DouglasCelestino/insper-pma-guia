@@ -155,3 +155,5 @@ O `pma` apontava `api/account` para `a2c3211`, que não existia no GitHub. Resol
 - EKS `store` em us-east-1 na conta do grupo `992382635549` (perfil `pma`, SSO `d-9067fdf7f1`). Deploy com `pma/k8s/deploy.sh`; HPA testado (1 → 8 pods, CPU 391%/50%). Exchange dá 502 na AWS (API externa). **Cluster precisa ser apagado** se ainda existir.
 - Docs: `pma/docs` e site público https://douglascelestino.github.io/pma-docs/ (repo `DouglasCelestino/pma-docs`, publicado com `mkdocs gh-deploy`).
 - Sem vídeo do load test nem vídeo individual (decisão do aluno).
+
+- Limpeza da AWS (verificado em 2026-11-27): stacks `eksctl-store-nodegroup-store-nodes` (apagado em 2026-11-20 23h51) e `eksctl-store-cluster` (apagado só em 2026-11-24 10h17 UTC) em `DELETE_COMPLETE`. Sem cluster, instâncias, NAT, load balancers, volumes soltos ou IPs na conta. O control plane e o NAT ficaram ligados cerca de 3,5 dias depois da entrega.
